@@ -1,4 +1,4 @@
-name: Alpha Build Manually (Without sign)
+name: Alpha Build (Without sign)
 
 on:
   push:
