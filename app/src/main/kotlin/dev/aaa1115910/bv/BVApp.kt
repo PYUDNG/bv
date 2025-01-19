@@ -13,11 +13,13 @@ import dev.aaa1115910.biliapi.repositories.AuthRepository
 import dev.aaa1115910.biliapi.repositories.ChannelRepository
 import dev.aaa1115910.biliapi.repositories.FavoriteRepository
 import dev.aaa1115910.biliapi.repositories.HistoryRepository
-import dev.aaa1115910.biliapi.repositories.IndexRepository
+import dev.aaa1115910.biliapi.repositories.ToViewRepository
 import dev.aaa1115910.biliapi.repositories.LoginRepository
+import dev.aaa1115910.biliapi.repositories.PgcRepository
 import dev.aaa1115910.biliapi.repositories.RecommendVideoRepository
 import dev.aaa1115910.biliapi.repositories.SearchRepository
 import dev.aaa1115910.biliapi.repositories.SeasonRepository
+import dev.aaa1115910.biliapi.repositories.UgcRepository
 import dev.aaa1115910.biliapi.repositories.VideoDetailRepository
 import dev.aaa1115910.biliapi.repositories.VideoPlayRepository
 import dev.aaa1115910.bv.dao.AppDatabase
@@ -34,19 +36,25 @@ import dev.aaa1115910.bv.viewmodel.PlayerViewModel
 import dev.aaa1115910.bv.viewmodel.TagViewModel
 import dev.aaa1115910.bv.viewmodel.UserViewModel
 import dev.aaa1115910.bv.viewmodel.VideoPlayerV3ViewModel
-import dev.aaa1115910.bv.viewmodel.home.AnimeViewModel
 import dev.aaa1115910.bv.viewmodel.home.DynamicViewModel
 import dev.aaa1115910.bv.viewmodel.home.PopularViewModel
 import dev.aaa1115910.bv.viewmodel.home.RecommendViewModel
-import dev.aaa1115910.bv.viewmodel.index.AnimeIndexViewModel
+import dev.aaa1115910.bv.viewmodel.index.PgcIndexViewModel
 import dev.aaa1115910.bv.viewmodel.login.AppQrLoginViewModel
 import dev.aaa1115910.bv.viewmodel.login.SmsLoginViewModel
+import dev.aaa1115910.bv.viewmodel.pgc.PgcAnimeViewModel
+import dev.aaa1115910.bv.viewmodel.pgc.PgcDocumentaryViewModel
+import dev.aaa1115910.bv.viewmodel.pgc.PgcGuoChuangViewModel
+import dev.aaa1115910.bv.viewmodel.pgc.PgcMovieViewModel
+import dev.aaa1115910.bv.viewmodel.pgc.PgcTvViewModel
+import dev.aaa1115910.bv.viewmodel.pgc.PgcVarietyViewModel
 import dev.aaa1115910.bv.viewmodel.search.SearchInputViewModel
 import dev.aaa1115910.bv.viewmodel.search.SearchResultViewModel
 import dev.aaa1115910.bv.viewmodel.user.FavoriteViewModel
 import dev.aaa1115910.bv.viewmodel.user.FollowViewModel
 import dev.aaa1115910.bv.viewmodel.user.FollowingSeasonViewModel
 import dev.aaa1115910.bv.viewmodel.user.HistoryViewModel
+import dev.aaa1115910.bv.viewmodel.user.ToViewViewModel
 import dev.aaa1115910.bv.viewmodel.user.UpInfoViewModel
 import dev.aaa1115910.bv.viewmodel.video.VideoDetailViewModel
 import kotlinx.coroutines.runBlocking
@@ -150,13 +158,15 @@ val appModule = module {
     single { ChannelRepository() }
     single { FavoriteRepository(get()) }
     single { HistoryRepository(get(), get()) }
+    single { ToViewRepository(get(), get()) }    
     single { SearchRepository(get(), get()) }
     single { VideoPlayRepository(get(), get()) }
     single { RecommendVideoRepository(get(), get()) }
     single { VideoDetailRepository(get(), get(), get()) }
     single { SeasonRepository(get()) }
     single { dev.aaa1115910.biliapi.repositories.UserRepository(get(), get()) }
-    single { IndexRepository() }
+    single { PgcRepository() }
+    single { UgcRepository(get()) }
     viewModel { DynamicViewModel(get(), get()) }
     viewModel { RecommendViewModel(get()) }
     viewModel { PopularViewModel(get()) }
@@ -165,18 +175,24 @@ val appModule = module {
     viewModel { PlayerViewModel(get()) }
     viewModel { UserViewModel(get()) }
     viewModel { HistoryViewModel(get(), get()) }
+    viewModel { ToViewViewModel(get(), get()) }
     viewModel { FavoriteViewModel(get()) }
     viewModel { UpInfoViewModel(get()) }
     viewModel { FollowViewModel(get()) }
     viewModel { SearchInputViewModel(get()) }
     viewModel { SearchResultViewModel(get()) }
-    viewModel { AnimeViewModel() }
     viewModel { FollowingSeasonViewModel(get()) }
     viewModel { TagViewModel() }
     viewModel { VideoPlayerV3ViewModel(get(), get()) }
     viewModel { VideoDetailViewModel(get()) }
     viewModel { UserSwitchViewModel(get()) }
-    viewModel { AnimeIndexViewModel(get()) }
+    viewModel { PgcIndexViewModel(get()) }
+    viewModel { PgcAnimeViewModel(get()) }
+    viewModel { PgcGuoChuangViewModel(get()) }
+    viewModel { PgcDocumentaryViewModel(get()) }
+    viewModel { PgcMovieViewModel(get()) }
+    viewModel { PgcTvViewModel(get()) }
+    viewModel { PgcVarietyViewModel(get()) }
 }
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "Settings")
