@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
             BVMobileTheme {
                 if (isCheckingNetwork) {
                     // 避免提前加载内容
-                } else if (isMainlandChina) {
+                } else if (false) { // isMainlandChina
                     RegionBlockScreen()
                 } else {
                     MobileMainScreen()
